@@ -9,9 +9,14 @@ app.get("/", (req, res) => {
 
     res.render("index");
 });
-app.get("/perguntar", (req, res) => {
+app.get("/view/perguntar", (req, res) => {
 
     res.render("perguntar");
+});
+
+app.post("/SalvarPerguntar", (req, res)=>{
+    res.send("formulario recebido!! ");
+
 });
 
 
