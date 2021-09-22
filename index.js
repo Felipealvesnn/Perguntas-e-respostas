@@ -1,5 +1,16 @@
 const express = require("express");
 const app = express();
+const connection = require("./database/database"); //database
+const PerguntaModel = require("./database/Pergunta");
+
+connection
+.authenticate()
+.then(()=>{
+    console.log("conexao feita com banco de dados!")
+})
+.catch((msgErro)=>{
+    console.log(msgErron);
+})
 
 app.set('view engine', 'ejs'); //estou dizendo para o express usar o EJS como view engine
 app.use(express.static('public'));
@@ -30,6 +41,4 @@ app.listen(8080, () => {
     console.log("app rodandono");
 });
 
-function clicar(){
-    window.alert("tu cliocu");
-}
+
