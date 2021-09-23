@@ -17,3 +17,4 @@ pergunta.sync({force:false}).then(()=>{
     console.log('tabela criada');
 })
 
+module.exports = pergunta;
