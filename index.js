@@ -22,14 +22,14 @@ app.use(express.json());
 
 //rotas
 app.get("/", (req, res) => {
-    Pergunta.findAll({
-        raw: true
-    }).then(Pergunta => {
+    Pergunta.findAll({raw: true, order:[['id','DESC']]}).then(Pergunta => {
         console.log(Pergunta);
         res.render("index",{
         Pergunta : Pergunta 
     }
         );
+    }).catch((msgErro) => {
+        console.log(msgErron);
     })
 
 
@@ -51,6 +51,22 @@ app.post("/SalvarPerguntar", (req, res) => {
 
 });
 
+app.get("/perguntares/:id",(req, res)=>{
+    var id= req.params.id;
+    Pergunta.findOne({ 
+        where:{id:id}
+    }).then(pergunta=>{
+        if(pergunta != undefined){
+            res.render("perguntares",{
+                pergunta:pergunta 
+            });
+
+        }else{
+            res.redirect("/")
+
+        }
+    })
+});
 
 app.listen(8080, () => {
     console.log("app rodandono");
