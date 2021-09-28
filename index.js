@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const connection = require("./database/database"); //database
 const Pergunta = require("./database/Pergunta");
+const Resposta = require("./database/Resposta");
 
 connection
     .authenticate()
@@ -22,19 +23,23 @@ app.use(express.json());
 
 //rotas
 app.get("/", (req, res) => {
-    Pergunta.findAll({raw: true, order:[['id','DESC']]}).then(Pergunta => {
+    Pergunta.findAll({
+        raw: true,
+        order: [
+            ['id', 'DESC']
+        ]
+    }).then(Pergunta => {
         console.log(Pergunta);
-        res.render("index",{
-        Pergunta : Pergunta 
-    }
-        );
+        res.render("index", {
+            Pergunta: Pergunta
+        });
     }).catch((msgErro) => {
         console.log(msgErron);
     })
 
 
 });
-app.get("/views/perguntar", (req, res) => {
+app.get("/perguntar", (req, res) => {
 
     res.render("perguntar");
 });
@@ -51,17 +56,19 @@ app.post("/SalvarPerguntar", (req, res) => {
 
 });
 
-app.get("/perguntares/:id",(req, res)=>{
-    var id= req.params.id;
-    Pergunta.findOne({ 
-        where:{id:id}
-    }).then(pergunta=>{
-        if(pergunta != undefined){
-            res.render("perguntares",{
-                pergunta:pergunta 
+app.get("/perguntares/:id", (req, res) => {
+    var id = req.params.id;
+    Pergunta.findOne({
+        where: {
+            id: id
+        }
+    }).then(pergunta => {
+        if (pergunta != undefined) {
+            res.render("perguntares", {
+                pergunta: pergunta
             });
 
-        }else{
+        } else {
             res.redirect("/")
 
         }

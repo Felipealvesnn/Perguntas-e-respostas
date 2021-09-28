@@ -14,7 +14,7 @@ const pergunta = connection.define('pergunta', {
 });
 
 pergunta.sync({force:false}).then(()=>{
-    console.log('tabela criada');
+    console.log('tabela pergunta criada');
 })
 
 module.exports = pergunta;
